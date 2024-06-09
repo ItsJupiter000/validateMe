@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Content Page</h1>
+        <p>This is the protected content page that you can only access after logging in.</p>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function logout() {
+            fetch('http://localhost:8000/api/logout', {
+                method: 'POST',
+                credentials: 'include' // This will include the cookies in the request
+            })
+            .then(response => response.json())
+            .then(data => {
+                const messageDiv = document.getElementById('message');
+                if (data.message === 'User logged out successfully') {
+                    messageDiv.textContent = 'Logout successful. Redirecting to login page...';
+                    messageDiv.style.color = 'green';
+                    // Redirect to the login page after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1000);
+                } else {
+                    messageDiv.textContent = 'Logout failed: ' + data.message;
+                    messageDiv.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                const messageDiv = document.getElementById('message');
+                messageDiv.textContent = 'Error during logout: ' + error.message;
+                messageDiv.style.color = 'red';
+                console.error('Error during logout:', error);
+            });
+        }
+    </script>
+</body>
+</html>

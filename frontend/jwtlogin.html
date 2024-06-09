@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JWT Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login with JWT</h2>
+        <form id="jwtLoginForm">
+            <label for="token">JWT Token:</label>
+            <input type="text" id="token" name="token" required>
+            <input type="submit" value="Login">
+        </form>
+        <div id="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('jwtLoginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const token = document.getElementById('token').value;
+            const responseDiv = document.getElementById('response');
+
+            try {
+                const response = await fetch('http://localhost:8000/api/jwtlogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    responseDiv.textContent = 'Login successful!';
+                    responseDiv.style.color = 'green';
+                    // Redirect to the content page
+                    setTimeout(() => {
+                        window.location.href = 'content.html';
+                    }, 1000);
+                } else {
+                    responseDiv.textContent = `Login failed: ${result.message}`;
+                    responseDiv.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                responseDiv.textContent = 'An error occurred during login. Please try again later.';
+                responseDiv.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

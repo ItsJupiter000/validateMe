@@ -125,4 +125,4 @@ ValidateMe is a secure authentication system that uses JWT (JSON Web Tokens) to 
 ## Acknowledgements
 
 - Thanks to the open-source community for their contributions to libraries and frameworks used in this project.
-- Special thanks to Hitesh Chaudhary and Piyush Gard for their insightful YouTube channels, which provided valuable knowledge and inspiration for this project.
+- Special thanks to Hitesh Chaudhary and Piyush Garg for their insightful YouTube channels, which provided valuable knowledge and inspiration for this project.

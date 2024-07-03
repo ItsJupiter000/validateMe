@@ -64,6 +64,7 @@ const jwtLogin = (req, res) => {
 
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+        console.log(decoded);
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         return res.status(401).json({ message: 'Invalid or expired token' });

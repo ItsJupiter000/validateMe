@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: black;
             margin: 0;
             padding: 0;
         }
@@ -15,27 +15,34 @@
             max-width: 400px;
             margin: 50px auto;
             padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #28282B;
+            box-shadow: 0 0 1.5px rgb(255, 255, 255);
             border-radius: 8px;
             text-align: center;
         }
         h2 {
             margin-bottom: 20px;
             font-size: 24px;
-            color: #333;
+            color: white;
         }
         a {
             display: block;
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #007bff;
-            color: white;
+            background-color: #FAF9F6;
+            color: black;
             text-decoration: none;
             border-radius: 4px;
         }
         a:hover {
-            background-color: #0056b3;
+            background-color: #E1D9D1;
+        }
+        #google {
+            background-color: #db4437; /* Google red */
+            color: white;
+        }
+        #google:hover {
+            background-color: #a3362c; /* Dark red on hover */
         }
     </style>
 </head>
@@ -45,6 +52,7 @@
         <a href="signup.html">Sign Up</a>
         <a href="login.html">Login</a>
         <a href="jwtlogin.html">JWT Token Login</a>
+        <a id="google"  href="http://localhost:8000/api/auth/google">Sign in with Google</a> <!-- Added Sign in with Google button -->
     </div>
 </body>
 </html>

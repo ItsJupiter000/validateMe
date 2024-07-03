@@ -20,8 +20,15 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is required"],
+      // required: [true, "Password is required"],
     },
+    googleId: {
+      type: String,
+      // unique: true,
+      sparse: true
+    },
+    otp: String,
+    otpExpiry: Date
   },
   {
     timestamps: true,
